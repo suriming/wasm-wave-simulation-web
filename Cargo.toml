@@ -1,0 +1,29 @@
+[package]
+name = "wasm-water-simulation-web"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+wasm-bindgen = { version = "0.2.75", features = ["serde-serialize"] }
+
+[lib]
+name = "wasm_water_simulation_web"
+path = "src/lib.rs"
+crate-type = ["cdylib", "rlib"]
+
+[dependencies.web-sys]
+version = "0.3.4"
+features = [
+  'Document',
+  'Element',
+  'HtmlElement',
+  'HtmlCanvasElement',
+  'CanvasRenderingContext2d',
+  'Node',
+  'Window',
+]
+
+[dev-dependencies]
+wasm-bindgen-test = "0.3.33"

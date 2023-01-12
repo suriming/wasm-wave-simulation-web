@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Waving Water</title>
+    <script type="module">
+      // Import the wasm module
+      import init, { generate_wave } from "./pkg/wasm_water_simulation_web.js";
+      //Initialize it
+      let time = 0;
+      let wave_data = [];
+      init().then(() => {
+        const canvas = document.createElement("waving-water-canvas");
+        wave_data = generate_wave(time);
+        render_wave();
+        setInterval(() => {
+          time += 0.1;
+          wave_data = generate_wave(time);
+          render_wave();
+        }, 50);
+      });
+
+      function render_wave() {
+        const canvas = document.getElementById("waving-water-canvas");
+        const ctx = canvas.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
+        ctx.moveTo(0, wave_data[0]);
+        for (let i = 1; i < wave_data.length; i++) {
+          ctx.lineTo(i, wave_data[i]);
+        }
+        ctx.stroke();
+      }
+    </script>
+  </head>
+  <body>
+    <canvas id="waving-water-canvas" width="1023" height="1000"></canvas>
+  </body>
+</html>
