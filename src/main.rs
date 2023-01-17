@@ -1,5 +1,3 @@
-pub mod lib;
-
 use std::{
     fs,
     io::{prelude::*, BufReader},
